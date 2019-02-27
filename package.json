@@ -1,0 +1,16 @@
+{
+  "name": "websocket-lambda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "npx sls deploy --stage dev --region us-west-2 --verbose --aws-profile default",
+    "remove-deploy": "npx sls remove --stage dev --region us-west-2 --verbose --aws-profile default"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.411.0"
+  },
+  "devDependencies": {
+    "serverless-plugin-include-dependencies": "^3.2.1"
+  }
+}

@@ -1,0 +1,37 @@
+service: ${self:custom.config.service-name}
+
+plugins:
+  - serverless-plugin-include-dependencies
+
+custom:
+  region: ${opt:region, self:provider.region}
+  myStage: ${opt:stage, self:provider.stage}
+  config: ${file(./config/serviceConfig.yml)}
+  myProfile:
+    dev: default
+    staging: default
+    prod: default
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:DeleteItem
+    Resource:
+      - Fn::GetAtt: [ChatTable, Arn]
+  - Effect: Allow
+    Action:
+      - "execute-api:ManageConnections"
+    Resource:
+      - "arn:aws:execute-api:*:*:**/@connections/*"
+
+functions: ${file(./config/functions.yml)}
+
+resources:
+  Resources: ${file(./config/resources.yml)}
