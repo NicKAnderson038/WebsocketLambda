@@ -1,0 +1,37 @@
+{
+  "connectionHandler": {
+    "handler": "handler.connectionHandler",
+    "events": [
+      {
+        "websocket": {
+          "route": "$connect"
+        }
+      },
+      {
+        "websocket": {
+          "route": "$disconnect"
+        }
+      }
+    ]
+  },
+  "defaultHandler": {
+    "handler": "handler.defaultHandler",
+    "events": [
+      {
+        "websocket": {
+          "route": "$default"
+        }
+      }
+    ]
+  },
+  "sendMessageHandler": {
+    "handler": "handler.sendMessageHandler",
+    "events": [
+      {
+        "websocket": {
+          "route": "sendMessage"
+        }
+      }
+    ]
+  }
+}

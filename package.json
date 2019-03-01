@@ -1,16 +1,19 @@
 {
-  "name": "websocket-lambda",
+  "name": "websockets-chat",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "main": "handler.js",
   "scripts": {
-    "deploy": "npx sls deploy --stage dev --region us-west-2 --verbose --aws-profile default",
-    "remove-deploy": "npx sls remove --stage dev --region us-west-2 --verbose --aws-profile default"
+    "deploy": "sls deploy",
+    "remove-deploy": "sls remove",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
   "dependencies": {
-    "aws-sdk": "^2.411.0"
+    "aws-sdk": "^2.404.0",
+    "serverless-websockets-plugin": "^1.0.0"
   },
-  "devDependencies": {
-    "serverless-plugin-include-dependencies": "^3.2.1"
-  }
+  "devDependencies": {}
 }

@@ -8,5 +8,6 @@ jspm_packages
 # editor settings
 .vscode
 
-# yarn-error
+# error logs
 yarn-error.log
+npm-error.log
