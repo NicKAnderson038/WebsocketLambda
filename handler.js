@@ -12,32 +12,23 @@ const successfullResponse = {
   body: 'everything is alright',
 }
 
-module.exports.connectionHandler = (event, context, callback) => {
+module.exports.connectionHandler = async (event, context) => {
   console.log(event)
-
-  if (event.requestContext.eventType === 'CONNECT') {
-    // Handle connection
-    addConnection(event.requestContext.connectionId)
-      .then(() => {
-        callback(null, successfullResponse)
-      })
-      .catch(err => {
-        console.log(err)
-        callback(null, JSON.stringify(err))
-      })
-  } else if (event.requestContext.eventType === 'DISCONNECT') {
-    // Handle disconnection
-    deleteConnection(event.requestContext.connectionId)
-      .then(() => {
-        callback(null, successfullResponse)
-      })
-      .catch(err => {
-        console.log(err)
-        callback(null, {
-          statusCode: 500,
-          body: 'Failed to connect: ' + JSON.stringify(err),
-        })
-      })
+  try {
+    if (event.requestContext.eventType === 'CONNECT') {
+      // Handle connection
+      await addConnection(event.requestContext.connectionId)
+      return successfullResponse
+    } else if (event.requestContext.eventType === 'DISCONNECT') {
+      // Handle disconnection
+      await deleteConnection(event.requestContext.connectionId)
+      return successfullResponse
+    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify(error),
+    }
   }
 }
 
